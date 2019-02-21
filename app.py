@@ -3,6 +3,7 @@ import random
 from flask import Flask, request
 from pymessenger.bot import Bot
 import os 
+import logging
 app = Flask(__name__)
 ACCESS_TOKEN = ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
@@ -20,6 +21,7 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
        output = request.get_json()
+       logging.info('request recevived: ',output)
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
